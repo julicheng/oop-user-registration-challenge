@@ -4,4 +4,4 @@
 </footer>
 </html>
 
-<?php db_disconnect($db); ?>
+<?php Database::db_disconnect($database); ?>
