@@ -1,0 +1,76 @@
+navigation ul li{
+  display: inline;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 20px;
+  list-style-position:inside;
+}
+
+body {
+  text-align: center;
+  font-family: Comfortaa;
+  width: 50%;
+  margin: auto;
+}
+
+input {
+  margin: 3px;
+}
+
+h4 span {
+  font-weight: initial;
+}
+
+.profile {
+  text-align: left;
+}
+
+.form_update {
+  text-align: left;
+  font-weight: bold;
+}
+
+.profile-errors {
+  text-align: left;
+}
+
+.profile-image {
+  background: black;
+  width: 150px;
+  height: 150px;
+  float: right;
+}
+
+img {
+  width:100%;
+}
+
+#message {
+  margin-bottom: 15px;;
+}
+
+table {
+  width: 100%;
+  /* border: 0.5px solid black; */
+}
+
+td {
+  border: 1px solid black;
+  padding: 3px;
+}
+
+th {
+  border: 2px solid black;
+  padding: 3px;
+}
+
+@media screen and (max-width: 700px) {
+  .profile-image {
+    float: none;
+    margin: 20px auto;
+  }
+}
+
