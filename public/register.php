@@ -5,21 +5,23 @@
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <?php 
-$errors = [];
-if(is_post_request()) {
-    $user = [];
-    $user['first_name'] = isset($_POST['first_name']) ? $_POST['first_name'] : "";
-    $user['last_name'] = isset($_POST['last_name']) ? $_POST['last_name'] : "";
-    $user['email'] = isset($_POST['email']) ? $_POST['email'] : "";
-    $user['password'] = isset($_POST['password']) ? $_POST['password'] : "";
-    $user['confirm_password'] = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : "";
 
-    $result = insert_user($user);
+if(is_post_request()) {
+    $args = [];
+    $args['first_name'] = $_POST['first_name'] ?? "";
+    $args['last_name'] = $_POST['last_name'] ?? "";
+    $args['email'] = $_POST['email'] ?? "";
+    $args['password'] = $_POST['password'] ?? "";
+    $args['confirm_password'] = $_POST['confirm_password'] ?? "";
+
+    $user = new User($args);
+    $result = $user->save();
+
     if($result === true) {
          $_SESSION['message'] = 'Your account was created successfully. Please Log in.';
         redirect_to(url_for('/login.php'));
     } else {
-        $errors = $result;
+        $user->errors = $result;
     }
 
 }
@@ -28,7 +30,7 @@ if(is_post_request()) {
 
 <div class="content">
 
-    <?php echo display_errors($errors); ?>
+    <?php if (isset($user)) {echo display_errors($user->errors); }; ?>
 
     <form action="register.php" method="post">
 
