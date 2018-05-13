@@ -15,13 +15,13 @@ if(is_post_request()) {
     $args['confirm_password'] = $_POST['confirm_password'] ?? "";
 
     $user = new User($args);
-    $result = $user->save();
+    $result = $user->save(); // true or false
 
     if($result === true) {
          $_SESSION['message'] = 'Your account was created successfully. Please Log in.';
         redirect_to(url_for('/login.php'));
     } else {
-        $user->errors = $result;
+        $result = $user->errors;
     }
 
 }

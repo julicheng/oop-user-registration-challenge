@@ -43,8 +43,8 @@ if(is_post_request()) {
          $_SESSION['message'] = 'Your profile has updated successfully.';
         redirect_to(url_for('/profile.php?id=' . $_SESSION['id']));
     } else {
-        $user = User::find_by_id($id);
-        // $user->errors = $result;
+        $result = $user->errors;
+        
     }
 
 } elseif(is_get_request()) {
