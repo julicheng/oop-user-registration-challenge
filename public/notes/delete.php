@@ -9,13 +9,14 @@ if(!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
+$note = Note::find_by_id($id);
 
 if(is_post_request()) {
-   $result = delete_note($id);
+   $result = $note->delete($id);
    $_SESSION['message'] = 'The note was deleted successfully.';
    redirect_to(url_for('/notes/list.php?id=' . $_SESSION['id']));
 } else {
-    $note = find_note_by_id($id);
+    // $note = Note::find_by_id($id);
 }
 
 ?>
@@ -29,9 +30,9 @@ if(is_post_request()) {
     <div>
         <h1>Delete Note</h1>
         <p>Are you sure you want to delete this note?</p>
-        <p><?php echo $note['title']; ?></p>
+        <p><?php echo $note->title; ?></p>
 
-        <form action="<?php echo url_for('/notes/delete.php?id=' . $note['id']); ?>" method="post">
+        <form action="<?php echo url_for('/notes/delete.php?id=' . $note->id); ?>" method="post">
             <div>
                 <input type="submit" name="commit" value="Delete Note">
             </div>

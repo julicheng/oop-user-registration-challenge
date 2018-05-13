@@ -10,7 +10,7 @@ if(!isset($_GET['id'])) {
 
 $user_id = $_GET['id'];
 
-$notes_set = find_notes_by_user_id($user_id);
+$notes = Note::find_all_by_id($user_id);
 
 ?>
 
@@ -28,19 +28,15 @@ $notes_set = find_notes_by_user_id($user_id);
                     <th colspan="3">&nbsp;</th>
                 </tr>
 
-                <?php while($note = mysqli_fetch_assoc($notes_set)) { ?>
+                <?php foreach($notes as $note) { ?>
                     <tr>
-                        <td><?php echo $note['title']; ?></td>
-                        <td><a href="<?php echo url_for('/notes/show.php?id=' . $note['id']); ?>">View</a></td>
-                        <td><a href="<?php echo url_for('/notes/edit.php?id=' . $note['id']); ?>">Edit</a></td>
-                        <td><a href="<?php echo url_for('/notes/delete.php?id=' . $note['id']); ?>">Delete</a></td>
+                        <td><?php echo $note->title; ?></td>
+                        <td><a href="<?php echo url_for('/notes/show.php?id=' . $note->id); ?>">View</a></td>
+                        <td><a href="<?php echo url_for('/notes/edit.php?id=' . $note->id); ?>">Edit</a></td>
+                        <td><a href="<?php echo url_for('/notes/delete.php?id=' . $note->id); ?>">Delete</a></td>
                     </tr>
                 <?php } ?>
             </table>
-            
-            <?php 
-                mysqli_free_result($notes_set);
-            ?>
     
 </div>
 

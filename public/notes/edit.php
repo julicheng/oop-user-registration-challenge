@@ -4,31 +4,33 @@ require_once('../../private/initialize.php');
 require_login(); 
 $page_title = "Edit Note";
 
-$errors = "";
 
 if(!isset($_GET['id'])) {
     redirect_to(url_for('/notes/list.php?id=' . $_SESSION['id']));
 }
 
 $id = $_GET['id'];
+$note = Note::find_by_id($id);
 
 if(is_post_request()) {
 
-    $note = [];
-    $note['id'] = $id;
-    $note['title'] = isset($_POST['title']) ? $_POST['title'] : "";
-    $note['content'] = isset($_POST['content']) ? $_POST['content'] : "";
+    $args = [];
+    $args['id'] = $id;
+    $args['title'] = $_POST['title'] ?? "";
+    $args['content'] =$_POST['content'] ?? "";
 
-    $result = update_note($note); 
+    $note->merge_attributes($args);
+    $result = $note->save(); // returns errors if doesn't pass validation checks
+
     if($result === true) {
         $_SESSION['message'] = 'The note was edited successfully.';
         redirect_to(url_for('/notes/show.php?id=' . $id)); 
     } else {
-        $errors = $result;
+        $result = $note->errors;
     }
 
 } elseif (is_get_request()){
-    $note = find_note_by_id($id);
+    // $note = Note::find_by_id($id);
 }
 
 ?>
@@ -42,14 +44,14 @@ if(is_post_request()) {
     <div>
         <h1>Edit Note</h1>
 
-        <?php echo display_errors($errors); ?>
+        <?php echo display_errors($note->errors); ?>
         <form action="<?php echo url_for('/notes/edit.php?id=' . $id); ?>" method="post">
 
             <h3>Title</h3>
-            <input type="text" name="title" value="<?php echo $note['title']; ?>">
+            <input type="text" name="title" value="<?php echo $note->title; ?>">
 
             <h3>Content</h3>
-            <textarea name="content" rows="10" value="<?php echo $note['content']; ?>"><?php echo $note['content']; ?></textarea>
+            <textarea name="content" rows="10" value="<?php echo $note->content; ?>"><?php echo $note->content; ?></textarea>
 
             <div>
                 <br>

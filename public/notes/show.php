@@ -10,7 +10,7 @@ if(!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-$note = find_note_by_id($id);
+$note = Note::find_by_id($id);
 
 ?>
 
@@ -22,10 +22,10 @@ $note = find_note_by_id($id);
 
     <div>
 
-        <h1><?php echo $note['title']; ?></h1>
+        <h1><?php echo $note->title; ?></h1>
 
         <div>
-                <p><?php echo $note['content']; ?></p>
+                <p><?php echo $note->content; ?></p>
         </div>
 
     </div>
