@@ -28,11 +28,12 @@ if(is_post_request()) {
 
     if($_FILES['profile_img']['size'] !== 0) {        
         $file = $_FILES['profile_img'];
-        $file_result = validate_file($file);
+        $file_result = Validation::validate_file($file);
         if (is_array($file_result) == true) {
-            $file_errors = $file_result;
+            // $file_errors = $file_result;
+            $user->errors = $file_result;
         } else {
-            $user['profile_img'] = $file_result;
+            $args['profile_img'] = $file_result;
         }
     }
 
