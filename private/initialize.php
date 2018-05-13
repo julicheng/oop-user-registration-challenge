@@ -16,7 +16,6 @@ define("WWW_ROOT", '/oop-user-registration-challenge/public');
 require_once('functions.php');
 require_once('db_credentials.php');
 require_once('auth_functions.php');
-require_once('validation_functions.php');
 
 function my_autoload($class) {
     if(preg_match('/\A\w+\Z/', $class)) {
