@@ -47,7 +47,7 @@ function get_and_clear_session_message() {
 
 function display_session_message() {
     $msg = get_and_clear_session_message();
-    if(!is_blank($msg)) {
+    if(!Validation::is_blank($msg)) {
         return '<div id="message">' . $msg . '</div>';
     }
 }
