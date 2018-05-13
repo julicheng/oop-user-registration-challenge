@@ -9,36 +9,30 @@ include(SHARED_PATH . '/header.php');
 
 if(is_post_request()) {
 
-  $email = isset($_POST['email']) ? $_POST['email'] : '';
-  $password = isset($_POST['password']) ? $_POST['password'] : '';
+  $email = $_POST['email'] ?? "";
+  $password = $_POST['password'] ?? '';
 
-  //validations
-  if(is_blank($email)) {
+  if(Validation::is_blank($email)) {
     $errors[] = "Email cannot be blank.";
   }
-  if(is_blank($password)) {
+  if(Validation::is_blank($password)) {
     $errors[] = "Password cannot be blank.";
   }
 
-// if there are no errors then run these if statements
-if(empty($errors)) {
   $login_failure_msg = "Log in was unsuccessful.";
-  // see if username exists
-  $user = find_user_by_email($email);
-  if($user) {
-    if(password_verify($password, $user['hashed_password'])) {
-      // pass matches
-      log_in($user);
-      redirect_to(url_for('/index.php'));
-    } else {
-      // user found but pass does not match
-      $errors[] = $login_failure_msg;
-    }
-  } else {
-    // no username found
-    $errors[] = $login_failure_msg;
+
+  // if there are no errors then run these if statements
+  if(empty($errors)) {
+    // see if email exists
+    $user = User::find_by_email($email);
+    if($user != false && $user->verify_password($password)) {
+        log_in($user);
+        redirect_to(url_for('/index.php'));
+      } else {
+        // user found but pass does not match
+        $errors[] = $login_failure_msg;
+      }
   }
-}
 
 }
 
@@ -58,6 +52,22 @@ if(empty($errors)) {
         <input type="submit" name="submit" value="Login"  />
 
     </form>
+
+    <!-- <?php
+    
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query(Database::$database, $sql);
+    
+?>
+    <?php while($user = mysqli_fetch_assoc($result)) { ?>
+                    <tr>
+                        <td><?php echo $user['first_name']; ?></td>
+                        <td><?php echo $user['last_name']; ?></td>
+                  
+                    </tr>
+    
+    
+    <?php } ?> -->
 
 </div>
 
