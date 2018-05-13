@@ -15,7 +15,6 @@ class User extends Database {
     protected $password_update = true;
     protected $email_update = true;
     protected $profile_update = false;
-    protected $file_errors = [];
 
     public function __construct($args=[]) {
         // $this->db = new Database;
@@ -81,7 +80,6 @@ class User extends Database {
 
     protected function validate() {
         // $this->errors = [];
-        $this->errors = $this->file_errors;
 
         // first name
         if(Validation::is_blank($this->first_name)) {
