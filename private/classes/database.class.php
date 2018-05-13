@@ -1,6 +1,6 @@
 <?php
 
-class Database extends Base {
+class Database {
     static public $database;
     static protected $table_name = "";
     static protected $columns = [];
