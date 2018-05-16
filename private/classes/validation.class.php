@@ -11,16 +11,6 @@ class Validation extends Database {
         // not unique;
         return false;
         }
-
-        // $sql = "SELECT * FROM users ";
-        // $sql.= "WHERE email='" . $email . "' ";
-        // $sql.= "AND id !='" . $current_id . "'";
-
-        // $user_set = Database::$database->query($sql);
-        // $user_count = mysqli_num_rows($user_set);
-        // $user_set->free();
-
-        // return $user_count === 0; // returns true/false
     }
 
     static public function is_blank($value) {
