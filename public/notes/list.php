@@ -1,7 +1,7 @@
 <?php 
 
 require_once('../../private/initialize.php');
-require_login(); 
+$session->require_login(); 
 $page_title = "Notes"; 
 
 if(!isset($_GET['id'])) {

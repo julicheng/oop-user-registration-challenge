@@ -1,7 +1,7 @@
 <?php 
 
 require_once('../../private/initialize.php'); 
-require_login(); 
+$session->require_login(); 
 $page_title = "Delete Note"; 
 
 if(!isset($_GET['id'])) {
@@ -13,7 +13,7 @@ $note = Note::find_by_id($id);
 
 if(is_post_request()) {
    $result = $note->delete($id);
-   $_SESSION['message'] = 'The note was deleted successfully.';
+   $session->message('The note was deleted successfully.');
    redirect_to(url_for('/notes/list.php?id=' . $_SESSION['id']));
 } else {
     // $note = Note::find_by_id($id);

@@ -1,7 +1,7 @@
 <?php 
 
 require_once('../../private/initialize.php');
-require_login(); 
+$session->require_login(); 
 $page_title = "Edit Note";
 
 
@@ -23,7 +23,7 @@ if(is_post_request()) {
     $result = $note->save(); // returns errors if doesn't pass validation checks
 
     if($result === true) {
-        $_SESSION['message'] = 'The note was edited successfully.';
+        $session->message('The note was edited successfully.');
         redirect_to(url_for('/notes/show.php?id=' . $id)); 
     } else {
         $result = $note->errors;

@@ -1,7 +1,7 @@
 <?php
 require_once('../private/initialize.php');
 
-log_out();
+$session->log_out();
 
 redirect_to(url_for('login.php'));
 

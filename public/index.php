@@ -1,5 +1,5 @@
 <?php require_once('../private/initialize.php'); ?>
-<?php require_login(); ?>
+<?php $session->require_login(); ?>
 <?php $page_title = "Home"; ?>
 
 <?php include(SHARED_PATH . '/header.php'); ?>

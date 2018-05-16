@@ -26,7 +26,7 @@ if(is_post_request()) {
     // see if email exists
     $user = User::find_by_email($email);
     if($user != false && $user->verify_password($password)) {
-        log_in($user);
+        $session->log_in($user);
         redirect_to(url_for('/index.php'));
       } else {
         // user found but pass does not match

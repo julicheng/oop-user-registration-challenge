@@ -18,7 +18,7 @@ if(is_post_request()) {
     $result = $user->save(); // true or false
 
     if($result === true) {
-         $_SESSION['message'] = 'Your account was created successfully. Please Log in.';
+         $session->message('Your account was created successfully. Please Log in.');
         redirect_to(url_for('/login.php'));
     } else {
         $result = $user->errors;

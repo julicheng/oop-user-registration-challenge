@@ -1,5 +1,5 @@
 <?php require_once('../private/initialize.php'); ?>
-<?php require_login(); ?>
+<?php $session->require_login(); ?>
 <?php $page_title = "Profile"; ?>
 
 <?php include(SHARED_PATH . '/header.php'); ?>
@@ -41,7 +41,7 @@ if(is_post_request()) {
     $result = $user->save();
 
     if ($result === true) {
-         $_SESSION['message'] = 'Your profile has updated successfully.';
+         $session->message('Your profile has updated successfully.');
         redirect_to(url_for('/profile.php?id=' . $_SESSION['id']));
     } else {
         $result = $user->errors;
