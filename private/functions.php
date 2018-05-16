@@ -21,7 +21,6 @@ function is_get_request() {
     return $_SERVER['REQUEST_METHOD'] == 'GET';
 }
 
-
 function display_errors($errors=[]) {
     $output = "";
     if(!empty($errors)) {
@@ -35,21 +34,6 @@ function display_errors($errors=[]) {
         $output .= "</div>";
     }
     return $output;
-}
-
-function get_and_clear_session_message() {
-    if(isset($_SESSION['message']) && $_SESSION['message'] != "") {
-        $msg = $_SESSION['message'];
-        unset($_SESSION['message']);
-        return $msg;
-    }
-}
-
-function display_session_message() {
-    $msg = get_and_clear_session_message();
-    if(!Validation::is_blank($msg)) {
-        return '<div id="message">' . $msg . '</div>';
-    }
 }
 
 ?>
